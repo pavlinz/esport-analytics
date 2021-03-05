@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/gamesFragment">
+
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.main.MainFragment"
+        android:label="Games"
+        tools:layout="@layout/main_fragment" />
+    <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.analytics.AnalyticsFragment"
+        android:label="Analytics"
+        tools:layout="@layout/fragment_analytics" />
+    <fragment
+        android:id="@+id/teamsFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.teams.TeamsFragment"
+        android:label="Leagues"
+        tools:layout="@layout/fragment_teams" >
+        <action
+            android:id="@+id/action_teamsFragment_to_specificTeamFragment"
+            app:destination="@id/specificTeamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/specificTeamFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.teams.SpecificTeamFragment"
+        android:label="Team"
+        tools:layout="@layout/fragment_specific_team" >
+        <action
+            android:id="@+id/action_specificTeamFragment_to_teamsFragment"
+            app:destination="@id/teamsFragment" />
+    </fragment>
+</navigation>
