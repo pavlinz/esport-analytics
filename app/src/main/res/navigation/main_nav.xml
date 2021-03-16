@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_analytics" />
     <fragment
         android:id="@+id/teamsFragment"
-        android:name="by.vasilevskiy.dota2analytics.ui.teams.TeamsFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.teams.fragments.TeamsFragment"
         android:label="Leagues"
         tools:layout="@layout/fragment_teams" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/specificTeamFragment"
-        android:name="by.vasilevskiy.dota2analytics.ui.teams.SpecificTeamFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.teams.fragments.SpecificTeamFragment"
         android:label="Team"
         tools:layout="@layout/fragment_specific_team" >
         <action

@@ -1,17 +1,17 @@
-package by.vasilevskiy.dota2analytics.ui.teams
+package by.vasilevskiy.dota2analytics.ui.teams.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import by.vasilevskiy.dota2analytics.api.provideApi
+import androidx.lifecycle.viewModelScope
 import by.vasilevskiy.dota2analytics.data.Team
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import by.vasilevskiy.dota2analytics.repositories.TeamsRepository
+import kotlinx.coroutines.launch
 
-class TeamsViewModel: ViewModel() {
+class TeamsViewModel(private var repository: TeamsRepository) : ViewModel() {
 
     init {
+        repository = TeamsRepository()
+
         getTeams()
     }
 
@@ -23,19 +23,21 @@ class TeamsViewModel: ViewModel() {
     }
 
     private fun getTeams() {
-        provideApi().getTeams().enqueue(object : Callback<List<Team>> {
-            override fun onResponse(
-                call: Call<List<Team>>,
-                response: Response<List<Team>>
-            ) {
-                if (response.isSuccessful) {
-                    result.value = response.body()
-                }
+        viewModelScope.launch {
+            val response = repository.getTeams()
+            result.postValue(response)
+        }
+    }
+
+    /*private fun getSpecificTeam() {
+        provideApi().getTeams().enqueue(object : Callback<Team> {
+            override fun onFailure(call: Call<Team>, t: Throwable) {
+
             }
 
-            override fun onFailure(call: Call<List<Team>>, t: Throwable) {
-                Log.e("MainViewModel", t.message.toString())
+            override fun onResponse(call: Call<Team>, response: Response<Team>) {
+
             }
         })
-    }
+    }*/
 }
