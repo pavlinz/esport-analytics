@@ -1,33 +1,14 @@
 package by.vasilevskiy.dota2analytics.repositories
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import by.vasilevskiy.dota2analytics.api.provideApi
-import by.vasilevskiy.dota2analytics.data.Team
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TeamsRepository {
 
-    fun getTeams(): List<Team> {
+    suspend fun getTeams() = provideApi().getTeams()
 
-        lateinit var responseApi : List<Team>
+    suspend fun getSpecificTeam(id: Int) = provideApi().getSpecificTeam(id)
 
-        provideApi().getTeams().enqueue(object : Callback<List<Team>> {
-            override fun onResponse(
-                call: Call<List<Team>>,
-                response: Response<List<Team>>
-            ) {
-                if (response.isSuccessful) {
-                    responseApi = response.body()!!
-                }
-            }
+    suspend fun getTeamPlayers(id: Int) = provideApi().getTeamPlayers(id)
 
-            override fun onFailure(call: Call<List<Team>>, t: Throwable) {
-                responseApi = emptyList()
-            }
-        })
-        return responseApi
-    }
+    suspend fun getTeamMatches(id: Int) = provideApi().getTeamMatches(id)
 }
