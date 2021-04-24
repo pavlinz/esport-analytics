@@ -16,7 +16,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:background="@color/toolbarBackground"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin" />
 
@@ -35,8 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
+        android:visibility="invisible"
         android:layout_gravity="bottom"
-        android:background="@color/white"
+        android:background="@color/menuBackground"
         app:layout_insetEdge="bottom"
         app:menu="@menu/bottom_menu" />
 </RelativeLayout>

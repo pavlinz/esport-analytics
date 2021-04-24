@@ -1,63 +1,78 @@
 package by.vasilevskiy.dota2analytics.ui.teams.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import by.vasilevskiy.dota2analytics.Application
+import by.vasilevskiy.dota2analytics.helpers.NetworkManager
 import by.vasilevskiy.dota2analytics.R
 import by.vasilevskiy.dota2analytics.adapters.TeamAdapter
-import by.vasilevskiy.dota2analytics.repositories.TeamsRepository
-import by.vasilevskiy.dota2analytics.ui.teams.viewmodel.TeamsViewModel
-import by.vasilevskiy.dota2analytics.ui.teams.viewmodel.TeamsViewModelFactory
+import by.vasilevskiy.dota2analytics.models.Team
+import by.vasilevskiy.dota2analytics.utils.hide
+import by.vasilevskiy.dota2analytics.utils.showNoNetworkConnectionToast
 import kotlinx.android.synthetic.main.fragment_teams.*
+import java.lang.Exception
 
-class TeamsFragment : Fragment(), TeamAdapter.OnTeamListener {
-
-    private val TAG = "TeamsFragment"
-
-    private lateinit var viewModel: TeamsViewModel
-    private lateinit var viewModelFactory: TeamsViewModelFactory
+class TeamsFragment : BaseFragment(R.layout.fragment_teams), TeamAdapter.OnTeamListener {
 
     private lateinit var recyclerView: RecyclerView
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_teams, container, false)
-    }
+    private lateinit var response: List<Team>
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setViewModel()
+        setRecyclerView()
+        observeTeams()
+        setOnQueryTextListener()
+    }
 
-        progressBar.visibility = View.VISIBLE
-
-        viewModelFactory = TeamsViewModelFactory((activity?.application as Application).repository)
-        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(TeamsViewModel::class.java)
-
+    private fun setRecyclerView() {
         recyclerView = activity?.findViewById(R.id.recycler_view_teams)!!
-
         recyclerView?.layoutManager = LinearLayoutManager(activity)
+    }
 
-        viewModel.result.observe(viewLifecycleOwner, Observer {
-            recyclerView?.adapter = TeamAdapter(it, requireActivity(), this)
+    private fun observeTeams() {
+        viewModel.result.observe(viewLifecycleOwner, Observer { listOfTeams ->
+            listOfTeams?.let {
+                viewModel.searchList.clear()
+                viewModel.searchList.addAll(listOfTeams)
+                recyclerView?.adapter = TeamAdapter(listOfTeams, requireActivity(), this)
+                progressBar.hide()
+            }
+        })
+    }
 
-            progressBar.visibility = View.INVISIBLE
+    private fun setOnQueryTextListener() {
+        search_view_teams.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                try {
+                    response = viewModel.result.value!!
+                    response = (response as MutableList).filter { it.name.contains(p0 as CharSequence, true) }
+
+                    recyclerView?.adapter = TeamAdapter(response, requireActivity(), this@TeamsFragment)
+                    viewModel.searchList.clear()
+                    viewModel.searchList.addAll(response)
+                } catch (e: Exception) { }
+
+                return true
+            }
         })
     }
 
     override fun onTeamClick(position: Int) {
-        var bundle = Bundle()
-        bundle.putInt("arg1", position)
+        if (NetworkManager.isNetworkAvailable(requireContext())) {
+            var bundle = Bundle()
+            bundle.putInt("position", position)
 
-        findNavController().navigate(R.id.action_teamsFragment_to_specificTeamFragment, bundle)
+            findNavController().navigate(R.id.action_teamsFragment_to_specificTeamFragment, bundle)
+        } else {
+            activity?.showNoNetworkConnectionToast()
+        }
     }
 }

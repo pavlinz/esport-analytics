@@ -1,21 +1,19 @@
 package by.vasilevskiy.dota2analytics.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import by.vasilevskiy.dota2analytics.R
-import by.vasilevskiy.dota2analytics.api.provideApi
-import by.vasilevskiy.dota2analytics.data.Player
+import by.vasilevskiy.dota2analytics.data.api.provideApi
+import by.vasilevskiy.dota2analytics.models.Player
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class PlayerAdapter(
     private val list: List<Player>,

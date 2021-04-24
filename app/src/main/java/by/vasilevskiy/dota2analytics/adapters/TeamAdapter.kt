@@ -4,21 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import by.vasilevskiy.dota2analytics.R
-import by.vasilevskiy.dota2analytics.data.Team
+import by.vasilevskiy.dota2analytics.models.Team
 import by.vasilevskiy.dota2analytics.helpers.TeamsLogoHelper
 import com.bumptech.glide.Glide
-import de.hdodenhof.circleimageview.CircleImageView
 
 class TeamAdapter(
     private val list: List<Team>,
     private val context: Context,
     private val onTeamListener: OnTeamListener
 ) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
-
-    private val TAG = "TeamAdapter"
 
     private val teamsLogoHelper: TeamsLogoHelper = TeamsLogoHelper()
 
@@ -47,7 +45,7 @@ class TeamAdapter(
     class TeamViewHolder(itemView: View, onTeamListener: OnTeamListener) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        var teamImageView: CircleImageView? = null
+        var teamImageView: ImageView? = null
         var teamNameTextView: TextView? = null
 
         private val onTeamListener: OnTeamListener

@@ -26,6 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/toolbarBackground"
                 android:orientation="vertical">
 
                 <ImageView
@@ -55,24 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom"
+            android:background="@color/toolbarBackground"
             app:layout_collapseMode="pin"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabTextColor="@color/white">
-
-            <!--<com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Players" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Overview"/>
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Matches" />-->
 
         </com.google.android.material.tabs.TabLayout>
 

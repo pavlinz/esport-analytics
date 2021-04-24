@@ -1,5 +1,49 @@
 <resources>
-    <string name="app_name">dota2analytics</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Dota Analytics</string>
+
+    <!-- Preference Titles -->
+    <string name="general_header">General</string>
+
+    <!-- Messages Preferences -->
+    <string name="language_title">Language settings</string>
+    <string name="theme_title">Change theme</string>
+
+    <string name="english_language" translatable="false">English</string>
+    <string name="russian_language" translatable="false">Русский</string>
+
+    <string name="language_key" translatable="false">language</string>
+
+    <string name="dark_mode" translatable="false">Dark</string>
+    <string name="light_mode" translatable="false">Light</string>
+
+    // Bottom Menu
+    <string name="teams">Teams</string>
+    <string name="games">Games</string>
+    <string name="news">News</string>
+    <string name="settings">Settings</string>
+
+    // SearchView
+    <string name="search_view_title">Enter the name of the team</string>
+
+    // Specific team ViewPager
+    <string name="players_tab">Players</string>
+    <string name="overview_tab">Overview</string>
+    <string name="matches_tab">Matches</string>
+
+    // Overview Page
+    <string name="wins_field">Wins: </string>
+    <string name="losses_field">Losses: </string>
+    <string name="rating_field">Rating: </string>
+
+    // Matches Page
+    <string name="won_match">Won Match</string>
+    <string name="lost_match">Lost Match</string>
+
+    <string name="news_portal">dotesport.com</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="who_will_win">Who will win?</string>
+    <string name="vote">Vote</string>
+
+    <string name="made_by_vasilevskiy_technologies" translatable="false">Made by Vasilevskiy Pavel</string>
+
 </resources>

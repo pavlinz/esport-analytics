@@ -9,9 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import by.vasilevskiy.dota2analytics.R
-import by.vasilevskiy.dota2analytics.data.Match
+import by.vasilevskiy.dota2analytics.models.Match
 import com.bumptech.glide.Glide
-import de.hdodenhof.circleimageview.CircleImageView
 
 class MatchesAdapter(
     private val list: List<Match>,
@@ -34,10 +33,10 @@ class MatchesAdapter(
         Glide.with(context).load(item.opposing_team_logo).into(holder.opposingTeamImageView!!)
         holder.opposingTeamTextView?.text = item.opposing_team_name
         if ((item.radiant && item.radiant_win) || (!item.radiant && !item.radiant_win)) {
-            holder.resultTextView?.text = "Won Match"
+            holder.resultTextView?.text = context.getString(R.string.won_match)
             holder.resultTextView?.setTextColor(ContextCompat.getColor(context, R.color.green))
         } else{
-            holder.resultTextView?.text = "Lost Match"
+            holder.resultTextView?.text = context.getString(R.string.lost_match)
             holder.resultTextView?.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }

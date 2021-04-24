@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dota Analytics</string>
+
+    <!-- Preference Titles -->
+    <string name="general_header">Общие</string>
+
+    <!-- Messages Preferences -->
+    <string name="language_title">Настройки языка</string>
+    <string name="theme_title">Изменить тему</string>
+
+    // Bottom Menu
+    <string name="teams">Команды</string>
+    <string name="games">Игры</string>
+    <string name="news">Новости</string>
+    <string name="settings">Настройки</string>
+
+    // SearchView
+    <string name="search_view_title">Введите название команды</string>
+
+    // Specific team ViewPager
+    <string name="players_tab">Игроки</string>
+    <string name="overview_tab">Обзор</string>
+    <string name="matches_tab">Матчи</string>
+
+    // Overview Page
+    <string name="wins_field">Победы: </string>
+    <string name="losses_field">Поражения: </string>
+    <string name="rating_field">Рейтинг: </string>
+
+    // Matches Page
+    <string name="won_match">Победа</string>
+    <string name="lost_match">Проигрыш</string>
+
+    <string name="news_portal">dota2.net</string>
+    <string name="no_network_connection">Нет подключения к сети</string>
+    <string name="who_will_win">Кто победит?</string>
+    <string name="vote">Голосовать</string>
+
+</resources>
