@@ -1,11 +1,11 @@
 package by.vasilevskiy.dota2analytics.ui.settings
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
+import android.util.Log
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import by.vasilevskiy.dota2analytics.R
+import by.vasilevskiy.dota2analytics.utils.show
+import kotlinx.android.synthetic.main.main_activity.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

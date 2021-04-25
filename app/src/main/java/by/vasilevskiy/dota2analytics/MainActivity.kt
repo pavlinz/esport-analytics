@@ -12,9 +12,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import by.vasilevskiy.dota2analytics.helpers.ConnectionLiveData
+import by.vasilevskiy.dota2analytics.utils.show
 import by.vasilevskiy.dota2analytics.utils.showNoNetworkConnectionToast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.main_activity.*
 import java.util.*
 import javax.inject.Inject
 
@@ -57,6 +59,12 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean("restore")) {
+                showActivityComponent()
+            }
+        }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -120,6 +128,16 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             darkModeValues[0] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             darkModeValues[1] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+    }
+
+    private fun showActivityComponent() {
+        toolbar?.show()
+        bottom_nav_menu?.show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("restore", true)
     }
 
     private fun setLocale(lang: String) {
