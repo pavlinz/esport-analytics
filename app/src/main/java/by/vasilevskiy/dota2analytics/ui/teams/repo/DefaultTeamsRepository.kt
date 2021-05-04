@@ -1,7 +1,7 @@
-package by.vasilevskiy.dota2analytics.data
+package by.vasilevskiy.dota2analytics.ui.teams.repo
 
 import android.util.Log
-import by.vasilevskiy.dota2analytics.data.api.provideApi
+import by.vasilevskiy.dota2analytics.data.network.provideApi
 import by.vasilevskiy.dota2analytics.models.Match
 import by.vasilevskiy.dota2analytics.models.Player
 import by.vasilevskiy.dota2analytics.models.Team

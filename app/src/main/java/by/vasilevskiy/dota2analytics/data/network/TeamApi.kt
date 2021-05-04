@@ -1,4 +1,4 @@
-package by.vasilevskiy.dota2analytics.data.api
+package by.vasilevskiy.dota2analytics.data.network
 
 import by.vasilevskiy.dota2analytics.models.Match
 import by.vasilevskiy.dota2analytics.models.Player

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/gamesFragment"
-        android:name="by.vasilevskiy.dota2analytics.ui.main.MainFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.main.fragments.MainFragment"
         android:label="Games"
         tools:layout="@layout/main_fragment" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/specificUpcomingMatchFragment"
-        android:name="by.vasilevskiy.dota2analytics.ui.main.SpecificUpcomingMatchFragment"
+        android:name="by.vasilevskiy.dota2analytics.ui.main.fragments.SpecificUpcomingMatchFragment"
         android:label="Match"
         tools:layout="@layout/fragment_specific_upcoming_match" />
     <fragment

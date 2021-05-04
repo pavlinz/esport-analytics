@@ -9,7 +9,7 @@ import by.vasilevskiy.dota2analytics.helpers.NetworkManager
 import by.vasilevskiy.dota2analytics.models.Match
 import by.vasilevskiy.dota2analytics.models.Player
 import by.vasilevskiy.dota2analytics.models.Team
-import by.vasilevskiy.dota2analytics.data.DefaultTeamsRepository
+import by.vasilevskiy.dota2analytics.ui.teams.repo.DefaultTeamsRepository
 import by.vasilevskiy.dota2analytics.utils.showNoNetworkConnectionToast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext

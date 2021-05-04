@@ -1,8 +1,7 @@
-package by.vasilevskiy.dota2analytics.ui.main
+package by.vasilevskiy.dota2analytics.ui.main.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.vasilevskiy.dota2analytics.helpers.NetworkManager
 import by.vasilevskiy.dota2analytics.R
 import by.vasilevskiy.dota2analytics.adapters.UpcomingMatchesAdapter
+import by.vasilevskiy.dota2analytics.ui.main.parsers.UpcomingMatchParser
+import by.vasilevskiy.dota2analytics.ui.main.repo.GamesRepoImpl
+import by.vasilevskiy.dota2analytics.ui.main.viewmodel.MainViewModel
+import by.vasilevskiy.dota2analytics.ui.main.viewmodel.SpecificMatchViewModelFactory
 import by.vasilevskiy.dota2analytics.utils.remove
 import by.vasilevskiy.dota2analytics.utils.show
+import by.vasilevskiy.dota2analytics.utils.showNoNetworkConnectionToast
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.coroutines.*
@@ -41,7 +45,13 @@ class MainFragment : Fragment(), UpcomingMatchesAdapter.OnUpcomingTeamListener {
 
         rv_upcoming_matches.layoutManager = LinearLayoutManager(this.context)
         job = CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getData()
+            if (NetworkManager.isNetworkAvailable(requireContext())) {
+                viewModel.getData()
+            } else {
+                CoroutineScope(Dispatchers.Main).launch {
+                    activity?.showNoNetworkConnectionToast()
+                }
+            }
 
             if (!job.isCancelled) {
                 CoroutineScope(Dispatchers.Main).launch {
@@ -60,7 +70,9 @@ class MainFragment : Fragment(), UpcomingMatchesAdapter.OnUpcomingTeamListener {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             requireActivity(),
-            SpecificMatchViewModelFactory(requireContext())
+            SpecificMatchViewModelFactory(
+                GamesRepoImpl(UpcomingMatchParser())
+            )
         )
             .get(MainViewModel::class.java)
     }

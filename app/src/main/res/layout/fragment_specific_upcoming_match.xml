@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/toolbarBackground"
     android:orientation="vertical"
-    tools:context=".ui.main.SpecificUpcomingMatchFragment">
+    tools:context=".ui.main.fragments.SpecificUpcomingMatchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_upcoming_match"

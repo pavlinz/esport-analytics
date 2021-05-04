@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import by.vasilevskiy.dota2analytics.R
-import by.vasilevskiy.dota2analytics.data.api.provideApi
+import by.vasilevskiy.dota2analytics.data.network.provideApi
 import by.vasilevskiy.dota2analytics.models.Player
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
