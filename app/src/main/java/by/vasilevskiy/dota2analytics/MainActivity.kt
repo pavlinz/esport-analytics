@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 }
             }
             darkModeString -> {
-                key?.let {
+                key.let {
                     if (it == darkModeString) sharedPreferences?.let { pref ->
                         val darkModeValues = resources.getStringArray(R.array.dark_mode_values)
                         when (pref.getString(darkModeString, darkModeValues[0])) {
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun showActivityComponent() {
-        toolbar?.show()
+        toolbar.show()
         bottom_nav_menu?.show()
     }
 

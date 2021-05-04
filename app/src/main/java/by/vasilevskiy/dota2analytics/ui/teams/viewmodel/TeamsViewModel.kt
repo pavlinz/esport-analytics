@@ -29,6 +29,7 @@ class TeamsViewModel @Inject constructor(
     var players = MutableLiveData<List<Player>>()
     var result = MutableLiveData<List<Team>>()
     var selected = MutableLiveData<Team>()
+
     var searchList = mutableListOf<Team>()
 
     init {
@@ -37,6 +38,15 @@ class TeamsViewModel @Inject constructor(
 
     fun select(position: Int) {
         selected.value = searchList[position]
+    }
+
+    fun getSelectedTeam(): Array<String> {
+        selected.value.also { team ->
+            if (team != null) {
+                return arrayOf(team.wins.toString(), team.losses.toString(), team.rating.toString())
+            }
+        }
+        return arrayOf()
     }
 
     private fun getTeams() {
@@ -71,9 +81,7 @@ class TeamsViewModel @Inject constructor(
             viewModelScope.launch {
                 try {
                     val result = repository.getTeamMatches(selected.value!!.team_id)
-                    if (result != null) {
-                        for (i in result.size - 1 downTo 20) (result as MutableList).removeAt(i)
-                    }
+                    for (i in result.size - 1 downTo 20) (result as MutableList).removeAt(i)
                     matches.postValue(result)
                 } catch (e: Exception) {
                     Log.d(TAG, "getTeamMatches: ${e.message.toString()}")

@@ -1,9 +1,7 @@
 package by.vasilevskiy.dota2analytics.ui.teams.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.vasilevskiy.dota2analytics.R
@@ -15,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class TeamMatchesFragment : BaseFragment(R.layout.fragment_team_matches) {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setViewModel()
         setRecyclerView()
         observeMatches()

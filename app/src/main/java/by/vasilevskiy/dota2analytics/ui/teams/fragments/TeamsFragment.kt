@@ -1,6 +1,7 @@
 package by.vasilevskiy.dota2analytics.ui.teams.fragments
 
 import android.os.Bundle
+import android.view.View
 import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,8 +21,8 @@ class TeamsFragment : BaseFragment(R.layout.fragment_teams), TeamAdapter.OnTeamL
     private lateinit var recyclerView: RecyclerView
     private lateinit var response: List<Team>
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setViewModel()
         setRecyclerView()
         observeTeams()
@@ -30,7 +31,7 @@ class TeamsFragment : BaseFragment(R.layout.fragment_teams), TeamAdapter.OnTeamL
 
     private fun setRecyclerView() {
         recyclerView = activity?.findViewById(R.id.recycler_view_teams)!!
-        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
     private fun observeTeams() {
@@ -38,7 +39,7 @@ class TeamsFragment : BaseFragment(R.layout.fragment_teams), TeamAdapter.OnTeamL
             listOfTeams?.let {
                 viewModel.searchList.clear()
                 viewModel.searchList.addAll(listOfTeams)
-                recyclerView?.adapter = TeamAdapter(listOfTeams, requireActivity(), this)
+                recyclerView.adapter = TeamAdapter(listOfTeams, requireActivity(), this)
                 progressBar.hide()
             }
         })
@@ -55,7 +56,7 @@ class TeamsFragment : BaseFragment(R.layout.fragment_teams), TeamAdapter.OnTeamL
                     response = viewModel.result.value!!
                     response = (response as MutableList).filter { it.name.contains(p0 as CharSequence, true) }
 
-                    recyclerView?.adapter = TeamAdapter(response, requireActivity(), this@TeamsFragment)
+                    recyclerView.adapter = TeamAdapter(response, requireActivity(), this@TeamsFragment)
                     viewModel.searchList.clear()
                     viewModel.searchList.addAll(response)
                 } catch (e: Exception) { }
@@ -67,7 +68,7 @@ class TeamsFragment : BaseFragment(R.layout.fragment_teams), TeamAdapter.OnTeamL
 
     override fun onTeamClick(position: Int) {
         if (NetworkManager.isNetworkAvailable(requireContext())) {
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putInt("position", position)
 
             findNavController().navigate(R.id.action_teamsFragment_to_specificTeamFragment, bundle)
