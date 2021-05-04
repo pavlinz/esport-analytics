@@ -1,4 +1,4 @@
-package by.vasilevskiy.dota2analytics.ui.main
+package by.vasilevskiy.dota2analytics.ui.main.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -13,8 +13,12 @@ import by.vasilevskiy.dota2analytics.data.local.AppDatabase
 import by.vasilevskiy.dota2analytics.data.local.Vote
 import by.vasilevskiy.dota2analytics.data.local.VoteDao
 import by.vasilevskiy.dota2analytics.data.local.VotingOptions
+import by.vasilevskiy.dota2analytics.ui.main.models.FirebaseUpcomingMatch
+import by.vasilevskiy.dota2analytics.ui.main.parsers.UpcomingMatchParser
+import by.vasilevskiy.dota2analytics.ui.main.repo.GamesRepoImpl
+import by.vasilevskiy.dota2analytics.ui.main.viewmodel.MainViewModel
+import by.vasilevskiy.dota2analytics.ui.main.viewmodel.SpecificMatchViewModelFactory
 import by.vasilevskiy.dota2analytics.utils.remove
-import by.vasilevskiy.dota2analytics.utils.removeForbiddenCharacters
 import by.vasilevskiy.dota2analytics.utils.show
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
@@ -52,12 +56,10 @@ class SpecificUpcomingMatchFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(
             requireActivity(),
-            SpecificMatchViewModelFactory(requireContext())
+            SpecificMatchViewModelFactory(
+                GamesRepoImpl(UpcomingMatchParser())
+            )
         ).get(MainViewModel::class.java)
-
-        /*CoroutineScope(Dispatchers.IO).launch {
-            votesDao?.deleteAll()
-        }*/
 
         observeSelected()
         selectSpecificTeam()
@@ -88,7 +90,10 @@ class SpecificUpcomingMatchFragment : Fragment() {
         val matchName = viewModel.getRefactoredName()
 
         val allMatchesRef = database.getReference("upcoming_matches")
-        match = FirebaseUpcomingMatch(name = matchName)
+        match =
+            FirebaseUpcomingMatch(
+                name = matchName
+            )
 
         allMatchesRef.addValueEventListener(object : ValueEventListener {
 

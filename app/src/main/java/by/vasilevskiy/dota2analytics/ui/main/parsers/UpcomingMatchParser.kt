@@ -4,8 +4,9 @@ import by.vasilevskiy.dota2analytics.models.UpcomingMatch
 import by.vasilevskiy.dota2analytics.utils.Constants
 import org.jsoup.Jsoup
 import java.lang.Exception
+import javax.inject.Inject
 
-class UpcomingMatchParser {
+class UpcomingMatchParser @Inject constructor() {
 
     fun getData(): MutableList<UpcomingMatch> {
 

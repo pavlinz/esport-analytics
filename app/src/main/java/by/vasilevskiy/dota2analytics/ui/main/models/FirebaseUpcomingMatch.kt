@@ -1,4 +1,4 @@
-package by.vasilevskiy.dota2analytics.ui.main
+package by.vasilevskiy.dota2analytics.ui.main.models
 
 data class FirebaseUpcomingMatch(
     var name: String = "",

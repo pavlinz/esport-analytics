@@ -1,5 +1,6 @@
 package by.vasilevskiy.dota2analytics.ui.main
 
+import by.vasilevskiy.dota2analytics.ui.main.viewmodel.MainViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -12,7 +13,8 @@ class MainViewModelTest {
 
     @Before
     fun setUp() {
-        mainViewModel = MainViewModel()
+        mainViewModel =
+            MainViewModel()
     }
 
     @After
