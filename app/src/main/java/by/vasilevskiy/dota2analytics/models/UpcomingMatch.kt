@@ -13,8 +13,4 @@ class UpcomingMatch(
     companion object {
         val URL = "https://liquipedia.net/commons/images/2/2f/Dotalogo_std.png"
     }
-
-    override fun toString(): String {
-        return "UpcomingMatch(leagueName='$leagueName', leagueLogo='$leagueLogo', firstTeamName='$firstTeamName', secondTeamName='$secondTeamName', firstTeamLogo='$firstTeamLogo', secondTeamLogo='$secondTeamLogo', matchTime='$matchTime')"
-    }
 }
